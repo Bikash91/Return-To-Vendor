@@ -1,0 +1,95 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	xmlns:ci="com.sap.upl.ReturnToVendor.controller" controllerName="com.sap.upl.ReturnToVendor.controller.ReturnToVendor"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="{i18n>title}" id="page" busy="{settingsModel>/busy}" showHeader="false">
+		<content>
+			<VBox>
+				<f:SimpleForm editable="true" id="returnVendor" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="3" labelSpanS="12"
+					adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+					singleContainerFullSize="false">
+					<f:content>
+						<Label text="{i18n>materialNo}" design="Bold" required="true"/>
+						<Input id="material" name="MaterialNo" maxLength="10" required="true" value="{vendorModel>/MDNUMBER}" placeholder="{i18n>materialNo}"
+							change="onChange"></Input>
+						<Label text="{i18n>gs1}" design="Bold"/>
+						<Input placeholder="{i18n>gs1}" visible="{settingsModel>/GS1Visible}" value="{settingsModel>/GS1Value}" id="gs1" name="GS1"
+							change="onChange"/>
+						<Label text="{i18n>itemCode}" design="Bold" required="true"/>
+						<Input id="itemCode" name="ItemCode" maxLength="10" required="true" value="{lineitemData>/MATERIALNO}" placeholder="{i18n>itemCode}"
+							change="onChange" editable="{settingsModel>/gsPropertyenable}"></Input>
+						<Label text="{i18n>batch}" design="Bold" required="true"/>
+						<Input id="batch" visible="{settingsModel>/showBatch}" name="Batch" maxLength="10" required="true" value="{lineitemData>/BATCH}"
+							placeholder="{i18n>batch}" change="onChange" editable="{settingsModel>/gsPropertyenable}"></Input>
+						<Label text="{i18n>quantity}" design="Bold" required="true"/>
+						<Input id="quantity" name="Quantity" maxLength="10" required="true" value="{lineitemData>/QUANTITY}" placeholder="{i18n>quantity}"
+							change="onChange" editable="{settingsModel>/gsPropertyenable}"></Input>
+						<Label text="{i18n>sourceBin}" design="Bold" required="true"/>
+						<!--<Input id="sourceBin" name="SourceBin" maxLength="10" required="true" value="{lineitemData>/SOURCEBIN}" placeholder="{i18n>sourceBin}"
+							change="onChange"></Input>-->
+						<Input name="SourceBin" required="true" maxLength="10" id="sourceBin" type="Text" textFormatMode="Key" showValueHelp="true"
+							placeholder="{i18n>sourceBin}" valueHelpRequest="handleValueHelpRequest" suggestionItems="{path: '/BINSEARCHHELPSet'}"
+							value="{lineitemData>/SOURCEBIN}" change="onChange">
+							<suggestionItems>
+								<core:ListItem key="{SOURCEBIN}" text="{WHNUMBER}"/>
+							</suggestionItems>
+						</Input>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<VBox >
+				<Table id="idVendorItem" inset="false" alternateRowColors="true" items="{tableData>/NAVMDHEADERTOITEM}" noDataText="{i18n>nodata}">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="{i18n>items}" level="H2" id="tableData"/>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://add" type="Emphasized" press="addLineItem"/>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column demandPopin="true">
+							<Label design="Bold" textAlign="Left" text="{i18n>itemNo}"/>
+						</Column>
+						<Column demandPopin="true">
+							<Label design="Bold" textAlign="Left" text="{i18n>itemCode}"/>
+						</Column>
+						<Column demandPopin="true">
+							<Label design="Bold" textAlign="Left" text="{i18n>batch}"/>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Desktop">
+							<Label design="Bold" textAlign="Left" text="{i18n>quantity}"/>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Phone" visible="false">
+							<Label design="Bold" textAlign="Left" text="{i18n>unit}"/>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Desktop">
+							<Label design="Bold" textAlign="Left" text="{i18n>sourceBin}"/>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Desktop">
+							<Label design="Bold" textAlign="Left" text="{i18n>action}"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem >
+							<cells>
+								<Text text="{tableData>ITEMNO}"/>
+								<Text text="{tableData>MATERIALNO}"/>
+								<Text text="{tableData>BATCH}"/>
+								<Text text="{tableData>QUANTITY}"/>
+								<Text text="{tableData>UNITS}"/>
+								<Text text="{tableData>SOURCEBIN}"/>
+								<Button icon="sap-icon://delete" type="Reject" press="onDeleteLineItem"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button text="{i18n>post}" tooltip="{i18n>post}" press="onPressPost" icon="sap-icon://post" type="Emphasized"
+					enabled="{settingsModel>/enablePost}"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

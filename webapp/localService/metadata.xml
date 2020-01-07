@@ -1,0 +1,68 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:sap="http://www.sap.com/Protocols/SAPData"
+	xmlns:ux="http://www.sap.com/Protocols/OData4SAP/UX" xmlns:gp="http://www.sap.com/Protocols/SAPData/GenericPlayer" Version="1.0">
+	<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZWMS_UPL_RETURN_TO_VENDOR_SRV" sap:schema-version="1" xml:lang="en">
+			<EntityType Name="VRHEADER" sap:content-version="1">
+				<Key><PropertyRef Name="TRNUMBER"/></Key><Property Name="TRNUMBER" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="TR Number"/><Property Name="WHNUMBER" Type="Edm.String" Nullable="false" MaxLength="3" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="Warehouse No."/><Property Name="MESSAGE" Type="Edm.String" Nullable="false" MaxLength="50" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><NavigationProperty Name="NAVVRHEADERTOITEM" Relationship="ZWMS_UPL_RETURN_TO_VENDOR_SRV.VRHEADERTOITEM" FromRole="FromRole_VRHEADERTOITEM"
+					ToRole="ToRole_VRHEADERTOITEM"/></EntityType>
+			<EntityType Name="VRITEM" sap:content-version="1">
+				<Key><PropertyRef Name="TRNUMBER"/></Key><Property Name="TRNUMBER" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="TR Number"/><Property Name="BATCH" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="Batch"/><Property Name="UNIT" Type="Edm.String" Nullable="false" MaxLength="3" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:semantics="unit-of-measure" sap:label="AlternativeUnit"/><Property Name="QUANTITY" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false" sap:label="Requested qty"/><Property Name="SOURCEBIN" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false" sap:label="Source Stor.Bin"/><Property Name="DESTINATIONBIN" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false" sap:label="Destination Bin"/></EntityType>
+			<EntityType Name="QUANTVALIDATION" sap:content-version="1">
+				<Key><PropertyRef Name="WHNUMBER"/><PropertyRef Name="SOURCEBIN"/><PropertyRef Name="BATCH"/><PropertyRef Name="MATERIAL"/></Key><Property Name="WHNUMBER" Type="Edm.String" Nullable="false" MaxLength="3" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="Warehouse No."/><Property Name="SOURCEBIN" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="BATCH" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="MATERIAL" Type="Edm.String" Nullable="false" MaxLength="18" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="QUANTITY" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="UNITOFMEASURE" Type="Edm.String" Nullable="false" MaxLength="3" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="MDHEADER" sap:content-version="1">
+				<Key><PropertyRef Name="MDNUMBER"/></Key><Property Name="MDNUMBER" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="Material Doc."/><Property Name="WHNUMBER" Type="Edm.String" Nullable="false" MaxLength="3" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="Warehouse No."/><Property Name="TRNUMBER" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="TR Number"/><Property Name="PONUMBER" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="Purchasing Doc."/><NavigationProperty Name="NAVVRHEADERTOITEM" Relationship="ZWMS_UPL_RETURN_TO_VENDOR_SRV.MDHEADERTOITEM" FromRole="FromRole_MDHEADERTOITEM"
+					ToRole="ToRole_MDHEADERTOITEM"/></EntityType>
+			<EntityType Name="MDITEM" sap:content-version="1">
+				<Key><PropertyRef Name="MDNUMBER"/></Key><Property Name="MDNUMBER" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="Material Doc."/><Property Name="ITEMNO" Type="Edm.String" Nullable="false" MaxLength="4" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="Mat. Doc.Item"/><Property Name="MATERIALNO" Type="Edm.String" Nullable="false" MaxLength="18" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false" sap:label="Material"/><Property Name="BATCH" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:label="Batch"/><Property Name="QUANTITY" Type="Edm.String" Nullable="false" MaxLength="13" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="UNITS" Type="Edm.String" Nullable="false" MaxLength="3" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false" sap:semantics="unit-of-measure" sap:label="Unit of Entry"/></EntityType>
+			<Association Name="VRHEADERTOITEM" sap:content-version="1"><End Type="ZWMS_UPL_RETURN_TO_VENDOR_SRV.VRHEADER" Multiplicity="1" Role="FromRole_VRHEADERTOITEM"/><End Type="ZWMS_UPL_RETURN_TO_VENDOR_SRV.VRITEM" Multiplicity="*" Role="ToRole_VRHEADERTOITEM"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_VRHEADERTOITEM"><PropertyRef Name="TRNUMBER"/></Principal>
+					<Dependent Role="ToRole_VRHEADERTOITEM"><PropertyRef Name="TRNUMBER"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="MDHEADERTOITEM" sap:content-version="1"><End Type="ZWMS_UPL_RETURN_TO_VENDOR_SRV.MDHEADER" Multiplicity="1" Role="FromRole_MDHEADERTOITEM"/><End Type="ZWMS_UPL_RETURN_TO_VENDOR_SRV.MDITEM" Multiplicity="*" Role="ToRole_MDHEADERTOITEM"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_MDHEADERTOITEM"><PropertyRef Name="MDNUMBER"/></Principal>
+					<Dependent Role="ToRole_MDHEADERTOITEM"><PropertyRef Name="MDNUMBER"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZWMS_UPL_RETURN_TO_VENDOR_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="VRHEADERSet" EntityType="ZWMS_UPL_RETURN_TO_VENDOR_SRV.VRHEADER" sap:content-version="1" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false"/><EntitySet Name="VRITEMSet" EntityType="ZWMS_UPL_RETURN_TO_VENDOR_SRV.VRITEM" sap:content-version="1" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false"/><EntitySet Name="QUANTVALIDSet" EntityType="ZWMS_UPL_RETURN_TO_VENDOR_SRV.QUANTVALIDATION" sap:content-version="1" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false"/><EntitySet Name="MDHEADERSet" EntityType="ZWMS_UPL_RETURN_TO_VENDOR_SRV.MDHEADER" sap:content-version="1" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false"/><EntitySet Name="MDITEMSet" EntityType="ZWMS_UPL_RETURN_TO_VENDOR_SRV.MDITEM" sap:content-version="1" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false"/>
+				<AssociationSet Name="VRHEADERTOITEMSet" Association="ZWMS_UPL_RETURN_TO_VENDOR_SRV.VRHEADERTOITEM" deletable="false" creatable="false"
+					updatable="false"><End EntitySet="VRHEADERSet" Role="FromRole_VRHEADERTOITEM"/><End EntitySet="VRITEMSet" Role="ToRole_VRHEADERTOITEM"/></AssociationSet>
+				<AssociationSet Name="MDHEADERTOITEMSet" Association="ZWMS_UPL_RETURN_TO_VENDOR_SRV.MDHEADERTOITEM" deletable="false" creatable="false"
+					updatable="false"><End EntitySet="MDHEADERSet" Role="FromRole_MDHEADERTOITEM"/><End EntitySet="MDITEMSet" Role="ToRole_MDHEADERTOITEM"/></AssociationSet>
+			</EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self"
+				href="https://gwaas-ae7888026.hana.ondemand.com:443/odata/SAP/ZWMS_UPL_RETURN_TO_VENDOR_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version"
+				href="https://gwaas-ae7888026.hana.ondemand.com:443/odata/SAP/ZWMS_UPL_RETURN_TO_VENDOR_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
